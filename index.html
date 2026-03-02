@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chatbot PetFriendly</title>
+  <title>PetFriendly</title>
 
   <style>
     body {
@@ -12,6 +12,91 @@
       background-color: #f9f9f9;
     }
 
+    /* ---------------------- PÁGINA DE INICIO ---------------------- */
+
+    header {
+      background: #7b2cbf;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: white;
+    }
+
+    .hero h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #5a189a;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      width: 180px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card span {
+      font-size: 50px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      padding: 40px 20px;
+      text-align: center;
+      background: #f3e9ff;
+    }
+
+    .info h3 {
+      color: #5a189a;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background: #7b2cbf;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 40px;
+    }
+
+    /* ---------------------- CHATBOT ---------------------- */
+
     .chat-bubble {
       position: fixed;
       bottom: 20px;
@@ -19,7 +104,7 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: #007bff;
+      background: #7b2cbf;
       color: #fff;
       display: flex;
       align-items: center;
@@ -28,10 +113,11 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: background 0.3s;
       z-index: 1000;
+      font-size: 30px;
     }
 
     .chat-bubble:hover {
-      background: #0056b3;
+      background: #5a189a;
     }
 
     .chat-container {
@@ -60,7 +146,7 @@
     }
 
     .chat-header {
-      background: #007bff;
+      background: #7b2cbf;
       color: #fff;
       padding: 12px;
       text-align: center;
@@ -122,7 +208,7 @@
 
     .input-area button {
       padding: 12px 16px;
-      background: #007bff;
+      background: #7b2cbf;
       color: white;
       border: none;
       cursor: pointer;
@@ -130,7 +216,7 @@
     }
 
     .input-area button:hover {
-      background: #0056b3;
+      background: #5a189a;
     }
 
     @media (max-width: 480px) {
@@ -145,7 +231,41 @@
 
 <body>
 
-  <button class="chat-bubble" id="chatToggle" aria-label="Abrir chat">💬</button>
+  <!-- ---------------------- PÁGINA DE INICIO ---------------------- -->
+
+  <header>
+    <h1>🐶 PetFriendly</h1>
+  </header>
+
+  <section class="hero">
+    <h2>Encuentra a tu nuevo mejor amigo</h2>
+    <p>Adopta perros y gatos que buscan un hogar lleno de amor.</p>
+  </section>
+
+  <section class="categories">
+    <div class="card">
+      <span>🐶</span>
+      <strong>Perros</strong>
+    </div>
+
+    <div class="card">
+      <span>🐱</span>
+      <strong>Gatos</strong>
+    </div>
+  </section>
+
+  <section class="info">
+    <h3>¿Por qué adoptar?</h3>
+    <p>Le das una segunda oportunidad a un animal que lo necesita y ganas un compañero fiel.</p>
+  </section>
+
+  <footer>
+    © 2026 PetFriendly - Todos los derechos reservados
+  </footer>
+
+  <!-- ---------------------- CHATBOT ---------------------- -->
+
+  <button class="chat-bubble" id="chatToggle" aria-label="Abrir chat">🐶</button>
 
   <div class="chat-container" id="chatContainer" role="dialog" aria-modal="true">
     <div class="chat-header">
@@ -188,10 +308,13 @@
         btn.style.padding = "6px 10px";
         btn.style.border = "none";
         btn.style.borderRadius = "6px";
-        btn.style.background = "#007bff";
+        btn.style.background = "#7b2cbf";
         btn.style.color = "white";
         btn.style.cursor = "pointer";
         btn.style.fontSize = "13px";
+
+        btn.addEventListener("mouseover", () => btn.style.background = "#5a189a");
+        btn.addEventListener("mouseout", () => btn.style.background = "#7b2cbf");
 
         btn.addEventListener("click", () => {
           addMessage(opt.label, "user");
@@ -222,7 +345,7 @@
         };
       }
 
-      if (msg.includes("perro")) {
+      if (msg === "perro") {
         return {
           texto: "¡Los perros son increíbles! ¿Qué edad prefieres?",
           botones: [
@@ -233,7 +356,7 @@
         };
       }
 
-      if (msg.includes("gato")) {
+      if (msg === "gato") {
         return {
           texto: "¡Los gatos son maravillosos! ¿Qué edad prefieres?",
           botones: [
